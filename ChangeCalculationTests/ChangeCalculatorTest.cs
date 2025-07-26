@@ -3,9 +3,14 @@ namespace ChangeCalculationTests
     public class ChangeCalculatorTest
     {
         [Fact]
-        public void Test1()
+        public void CalculateChange_ReturnSingleValue_AvailableCoinMatchesWithChange()
         {
+            int change = 100;
+            var availableCoins = new List<int> { 100 };
 
+            var functionResult = ChangeCalculation.CalculateChange(change, availableCoins);
+
+            Assert.Equal(new List<int> { 100 }, functionResult);
         }
     }
 }
