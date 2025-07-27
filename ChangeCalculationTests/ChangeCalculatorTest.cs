@@ -12,7 +12,7 @@ namespace ChangeCalculationTests
             int change = 100;
             var availableCoins = new List<int> { 100 };
 
-            var functionResult = ChangeCalculation.CalculateChange(change, availableCoins);
+            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
 
             Assert.Equal(new List<int> { 100 }, functionResult);
         }
