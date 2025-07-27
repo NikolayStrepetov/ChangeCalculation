@@ -16,5 +16,16 @@ namespace ChangeCalculationTests
 
             Assert.Equal(new List<int> { 100 }, functionResult);
         }
+
+        [Fact]
+        public void CalculateChange_ReturnMultipleValues_ChangeIsCombinationOfAvailableCoins()
+        {
+            int change = 60;
+            var availableCoins = new List<int> { 50, 10 };
+
+            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+
+            Assert.Equal(new List<int> { 50, 10 }, functionResult);
+        }
     }
 }
