@@ -38,5 +38,16 @@ namespace ChangeCalculationTests
 
             Assert.Equal("Оплатите картой!", functionResult);
         }
+
+        [Fact]
+        public void CalculateChange_ReturnPayByCard_WhenNoAvailableCoinsForChange()
+        {
+            int change = 100;
+            var availableCoins = new List<int>();
+
+            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+
+            Assert.Equal("Оплатите картой!", functionResult);
+        }
     }
 }
