@@ -4,8 +4,16 @@ namespace ChangeCalculation
 {
     public static class ChangeCalculator
     {
+        private static readonly List<int> _validCoins = new List<int> { 100, 50, 10, 5, 2, 1 };
+
         public static object CalculateChange(int change, List<int> availableCoins)
         {
+            var invalidCoins = availableCoins.Where(x => !_validCoins.Contains(x)).ToList();
+            if (invalidCoins.Count > 0)
+            {
+                throw new ArgumentException("Недопустимые номиналы монет! Допустимые: 100, 50, 10, 5, 2, 1.");
+            }
+
             if (change < 0)
             {
                 throw new ArgumentException("Сумма сдачи не может быть отрицательной!", nameof(change));
