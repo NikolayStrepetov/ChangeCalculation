@@ -60,5 +60,16 @@ namespace ChangeCalculationTests
 
             Assert.Equal("Оплатите картой!", functionResult);
         }
+
+        [Fact]
+        public void CalculateChange_ReturnNoChangeRequired_WhenChangeIsZeroValue()
+        {
+            int change = 0;
+            var availableCoins = new List<int> { 100, 50 };
+
+            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+
+            Assert.Equal("Сдача не требуется!", functionResult);
+        }
     }
 }
