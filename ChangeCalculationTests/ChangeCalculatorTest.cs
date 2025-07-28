@@ -1,6 +1,4 @@
-using Xunit;
 using ChangeCalculation;
-using System.Collections.Generic;
 
 namespace ChangeCalculationTests
 {
