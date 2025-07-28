@@ -6,6 +6,11 @@ namespace ChangeCalculation
     {
         public static object CalculateChange(int change, List<int> availableCoins)
         {
+            if (change < 0)
+            {
+                throw new ArgumentException("Сумма сдачи не может быть отрицательной!", nameof(change));
+            }
+
             if (change == 0)
             {
                 return "Сдача не требуется!";
