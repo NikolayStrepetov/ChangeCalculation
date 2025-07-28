@@ -6,6 +6,11 @@ namespace ChangeCalculation
     {
         public static object CalculateChange(int change, List<int> availableCoins)
         {
+            if (change == 0)
+            {
+                return "Сдача не требуется!";
+            }
+
             availableCoins = availableCoins.OrderByDescending(x => x).ToList();
             var result = new List<int>();
 
