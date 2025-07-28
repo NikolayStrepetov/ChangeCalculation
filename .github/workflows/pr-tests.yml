@@ -1,12 +1,17 @@
-name: Run Unit Tests on PR
+name: Unit Tests on PR
 
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-    branches: [ main ]
+    branches: [ master ]
+
+permissions:
+  pull-requests: write
+  checks: write
+  statuses: write
 
 jobs:
-  test:
+  run-tests:
     name: Run Unit Tests
     runs-on: windows-latest
 
