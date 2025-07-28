@@ -8,12 +8,12 @@
         {
             var invalidCoins = availableCoins.Where(x => !_validCoins.Contains(x)).ToList();
             if (invalidCoins.Count > 0)
-                throw new ArgumentException("Недопустимые номиналы монет! Допустимые: 100, 50, 10, 5, 2, 1.");
+                throw new ArgumentException("Invalid coins! Valid are: 100, 50, 10, 5, 2, 1.");
 
             if (change < 0)
-                throw new ArgumentException("Сумма сдачи не может быть отрицательной!", nameof(change));
+                throw new ArgumentException("Change cannot be negative!", nameof(change));
 
-            if (change == 0) return "Сдача не требуется!";
+            if (change == 0) return "No change required!";
 
             availableCoins = availableCoins.OrderByDescending(x => x).ToList();
             var result = new List<int>();
@@ -27,7 +27,7 @@
                 }
             }
 
-            return change == 0 ? result : "Оплатите картой!";
+            return change == 0 ? result : "Pay by card!";
         }
     }
 }

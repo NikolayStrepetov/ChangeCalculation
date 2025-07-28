@@ -45,7 +45,7 @@ namespace ChangeCalculationTests
 
             var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
 
-            Assert.Equal("Оплатите картой!", functionResult);
+            Assert.Equal("Pay by card!", functionResult);
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace ChangeCalculationTests
 
             var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
 
-            Assert.Equal("Оплатите картой!", functionResult);
+            Assert.Equal("Pay by card!", functionResult);
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace ChangeCalculationTests
 
             var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
 
-            Assert.Equal("Сдача не требуется!", functionResult);
+            Assert.Equal("No change required!", functionResult);
         }
 
         [Fact]
