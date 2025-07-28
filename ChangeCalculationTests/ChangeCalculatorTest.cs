@@ -71,5 +71,14 @@ namespace ChangeCalculationTests
 
             Assert.Equal("Сдача не требуется!", functionResult);
         }
+
+        [Fact]
+        public void CalculateChange_ThrowsException_WhenChangeIsNegativeValue()
+        {
+            int change = -100;
+            var availableCoins = new List<int> { 100, 50 };
+
+            Assert.Throws<ArgumentException>(() => ChangeCalculator.CalculateChange(change, availableCoins));
+        }
     }
 }
