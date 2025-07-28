@@ -29,6 +29,17 @@ namespace ChangeCalculationTests
         }
 
         [Fact]
+        public void CalculateChange_ReturnCorrectMultipleValues_ChangeIsCombinationOfAvailableCoins()
+        {
+            int change = 30;
+            var availableCoins = new List<int> { 5, 5, 5, 5, 5, 5, 10, 10, 10, 5, 5, 5, 5, 5, 5 };
+
+            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+
+            Assert.Equal(new List<int> { 10, 10, 10 }, functionResult);
+        }
+
+        [Fact]
         public void CalculateChange_ReturnPayByCard_NotEnoughAvailableCoinsForChange()
         {
             int change = 100;
