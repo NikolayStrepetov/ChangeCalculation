@@ -96,7 +96,7 @@ namespace ChangeCalculationTests
             int change = 100;
             List<int> availableCoins = null;
 
-            Assert.Throws<ArgumentException>(() => ChangeCalculator.CalculateChange(change, availableCoins));
+            Assert.Throws<ArgumentNullException>(() => ChangeCalculator.CalculateChange(change, availableCoins));
         }
     }
 }
