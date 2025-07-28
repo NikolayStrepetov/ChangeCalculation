@@ -1,17 +1,24 @@
-﻿namespace ChangeCalculation
+﻿using System.Linq;
+
+namespace ChangeCalculation
 {
     public static class ChangeCalculator
     {
         public static object CalculateChange(int change, List<int> availableCoins)
         {
-            if (availableCoins.Contains(change))
+            availableCoins = availableCoins.OrderByDescending(x => x).ToList();
+            var result = new List<int>();
+
+            foreach (var coin in availableCoins)
             {
-                return new List<int> { change };
+                if (change >= coin)
+                {
+                    change -= coin;
+                    result.Add(coin);
+                }
             }
-            else
-            {
-                return "Оплатите картой!";
-            }
+
+            return change == 0 ? result : "Оплатите картой!";
         }
     }
 }
