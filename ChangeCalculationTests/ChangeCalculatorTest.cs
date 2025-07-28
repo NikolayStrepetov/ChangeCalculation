@@ -80,5 +80,14 @@ namespace ChangeCalculationTests
 
             Assert.Throws<ArgumentException>(() => ChangeCalculator.CalculateChange(change, availableCoins));
         }
+
+        [Fact]
+        public void CalculateChange_ThrowsException_WhenAvailableCoinsAreInvalid()
+        {
+            int change = 100;
+            var availableCoins = new List<int> { 100, 50, 10, 5, 2, 1, 15 };
+
+            Assert.Throws<ArgumentException>(() => ChangeCalculator.CalculateChange(change, availableCoins));
+        }
     }
 }
