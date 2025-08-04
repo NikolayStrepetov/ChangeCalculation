@@ -16,18 +16,43 @@
             if (change == 0) return "No change required!";
 
             availableCoins = availableCoins.OrderByDescending(x => x).ToList();
-            var result = new List<int>();
+            var result = FindCombination(change, availableCoins, new List<int>());
 
-            foreach (var coin in availableCoins)
+            return result != null ? result : "Pay by card!";
+        }
+
+        private static List<int> FindCombination(int remaining, List<int> coins, List<int> currentCombination)
+        {
+            if (remaining == 0)
             {
-                if (change >= coin)
+                return new List<int>(currentCombination);
+            }
+
+            if (coins.Count == 0)
+            {
+                return null;
+            }
+
+            for (int i  = 0; i < coins.Count; i++)
+            {
+                if (coins[i] > remaining)
                 {
-                    change -= coin;
-                    result.Add(coin);
+                    continue;
+                }
+
+                var newRemaining = remaining - coins[i];
+                var newCoins = new List<int>(coins);
+                newCoins.RemoveAt(i);
+                var newCombination = new List<int>(currentCombination) { coins[i] };
+
+                var result = FindCombination(newRemaining, newCoins, newCombination);
+                if (result != null)
+                {
+                    return result;
                 }
             }
 
-            return change == 0 ? result : "Pay by card!";
+            return null;
         }
     }
 }
