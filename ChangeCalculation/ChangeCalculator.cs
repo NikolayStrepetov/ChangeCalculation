@@ -4,19 +4,19 @@
     {
         private static readonly List<int> _validCoins = new List<int> { 100, 50, 10, 5, 2, 1 };
 
-        public static CalculationResult CalculateChange(int change, List<int> availableCoins)
+        public static CalculationResult CalculateChange(int amount, List<int> availableCoins)
         {
             var invalidCoins = availableCoins.Where(x => !_validCoins.Contains(x)).ToList();
             if (invalidCoins.Count > 0)
                 throw new ArgumentException("Invalid coins! Valid are: 100, 50, 10, 5, 2, 1.");
 
-            if (change < 0)
-                throw new ArgumentException("Change cannot be negative!", nameof(change));
+            if (amount < 0)
+                throw new ArgumentException("Change cannot be negative!", nameof(amount));
 
-            if (change == 0) return new CalculationResult { CanReturn = true, Coins = new List<int>() };
+            if (amount == 0) return new CalculationResult { CanReturn = true, Coins = new List<int>() };
 
             availableCoins = availableCoins.OrderByDescending(x => x).ToList();
-            var result = FindCombination(change, availableCoins, new List<int>());
+            var result = FindCombination(amount, availableCoins, new List<int>());
 
             return result != null ? new CalculationResult { CanReturn = true, Coins = result} : new CalculationResult { CanReturn = false, Coins = new List<int>() };
         }

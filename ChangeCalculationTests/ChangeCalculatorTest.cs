@@ -7,7 +7,7 @@ namespace ChangeCalculationTests
         [Fact]
         public void CalculateChange_ReturnSingleValue_AvailableCoinMatchesWithChange()
         {
-            int change = 100;
+            int amount = 100;
             var availableCoins = new List<int> { 100 };
             var expectedResult = new CalculationResult
             {
@@ -15,7 +15,7 @@ namespace ChangeCalculationTests
                 Coins = new List<int> { 100 }
             };
 
-            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+            var functionResult = ChangeCalculator.CalculateChange(amount, availableCoins);
 
             Assert.Equal(expectedResult.CanReturn, functionResult.CanReturn);
             Assert.Equal(expectedResult.Coins, functionResult.Coins);
@@ -24,7 +24,7 @@ namespace ChangeCalculationTests
         [Fact]
         public void CalculateChange_ReturnMultipleValues_ChangeIsCombinationOfAvailableCoins()
         {
-            int change = 60;
+            int amount = 60;
             var availableCoins = new List<int> { 50, 10 };
             var expectedResult = new CalculationResult
             {
@@ -32,7 +32,7 @@ namespace ChangeCalculationTests
                 Coins = new List<int> { 50, 10 }
             };
 
-            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+            var functionResult = ChangeCalculator.CalculateChange(amount, availableCoins);
 
             Assert.Equal(expectedResult.CanReturn, functionResult.CanReturn);
             Assert.Equal(expectedResult.Coins, functionResult.Coins);
@@ -41,7 +41,7 @@ namespace ChangeCalculationTests
         [Fact]
         public void CalculateChange_ReturnMultipleValuesOutOfOrder_ChangeIsCombinationOfAvailableCoins()
         {
-            int change = 61;
+            int amount = 61;
             var availableCoins = new List<int> { 50, 10, 5, 2, 2, 2 };
             var expectedResult = new CalculationResult
             {
@@ -49,7 +49,7 @@ namespace ChangeCalculationTests
                 Coins = new List<int> { 50, 5, 2, 2, 2 }
             };
 
-            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+            var functionResult = ChangeCalculator.CalculateChange(amount, availableCoins);
 
             Assert.Equal(expectedResult.CanReturn, functionResult.CanReturn);
             Assert.Equal(expectedResult.Coins, functionResult.Coins);
@@ -58,7 +58,7 @@ namespace ChangeCalculationTests
         [Fact]
         public void CalculateChange_ReturnCorrectMultipleValues_ChangeIsCombinationOfAvailableCoins()
         {
-            int change = 30;
+            int amount = 30;
             var availableCoins = new List<int> { 5, 5, 5, 5, 5, 5, 10, 10, 10, 5, 5, 5, 5, 5, 5 };
             var expectedResult = new CalculationResult
             {
@@ -66,7 +66,7 @@ namespace ChangeCalculationTests
                 Coins = new List<int> { 10, 10, 10 }
             };
 
-            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+            var functionResult = ChangeCalculator.CalculateChange(amount, availableCoins);
 
             Assert.Equal(expectedResult.CanReturn, functionResult.CanReturn);
             Assert.Equal(expectedResult.Coins, functionResult.Coins);
@@ -75,7 +75,7 @@ namespace ChangeCalculationTests
         [Fact]
         public void CalculateChange_CannotReturnChange_WhenNotEnoughAvailableCoinsForChange()
         {
-            int change = 100;
+            int amount = 100;
             var availableCoins = new List<int> { 50, 10 };
             var expectedResult = new CalculationResult
             {
@@ -83,7 +83,7 @@ namespace ChangeCalculationTests
                 Coins = new List<int>()
             };
 
-            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+            var functionResult = ChangeCalculator.CalculateChange(amount, availableCoins);
 
             Assert.Equal(expectedResult.CanReturn, functionResult.CanReturn);
             Assert.Equal(expectedResult.Coins, functionResult.Coins);
@@ -92,7 +92,7 @@ namespace ChangeCalculationTests
         [Fact]
         public void CalculateChange_CannotReturnChange_WhenNoAvailableCoinsForChange()
         {
-            int change = 100;
+            int amount = 100;
             var availableCoins = new List<int>();
             var expectedResult = new CalculationResult
             {
@@ -100,7 +100,7 @@ namespace ChangeCalculationTests
                 Coins = new List<int>()
             };
 
-            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+            var functionResult = ChangeCalculator.CalculateChange(amount, availableCoins);
 
             Assert.Equal(expectedResult.CanReturn, functionResult.CanReturn);
             Assert.Equal(expectedResult.Coins, functionResult.Coins);
@@ -109,7 +109,7 @@ namespace ChangeCalculationTests
         [Fact]
         public void CalculateChange_ReturnEmptyList_WhenChangeIsZeroValue()
         {
-            int change = 0;
+            int amount = 0;
             var availableCoins = new List<int> { 100, 50 };
             var expectedResult = new CalculationResult
             {
@@ -117,7 +117,7 @@ namespace ChangeCalculationTests
                 Coins = new List<int>()
             };
 
-            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+            var functionResult = ChangeCalculator.CalculateChange(amount, availableCoins);
 
             Assert.Equal(expectedResult.CanReturn, functionResult.CanReturn);
             Assert.Equal(expectedResult.Coins, functionResult.Coins);
@@ -126,28 +126,28 @@ namespace ChangeCalculationTests
         [Fact]
         public void CalculateChange_ThrowsException_WhenChangeIsNegativeValue()
         {
-            int change = -100;
+            int amount = -100;
             var availableCoins = new List<int> { 100, 50 };
 
-            Assert.Throws<ArgumentException>(() => ChangeCalculator.CalculateChange(change, availableCoins));
+            Assert.Throws<ArgumentException>(() => ChangeCalculator.CalculateChange(amount, availableCoins));
         }
 
         [Fact]
         public void CalculateChange_ThrowsException_WhenAvailableCoinsAreInvalid()
         {
-            int change = 100;
+            int amount = 100;
             var availableCoins = new List<int> { 100, 50, 10, 5, 2, 1, 15 };
 
-            Assert.Throws<ArgumentException>(() => ChangeCalculator.CalculateChange(change, availableCoins));
+            Assert.Throws<ArgumentException>(() => ChangeCalculator.CalculateChange(amount, availableCoins));
         }
 
         [Fact]
         public void CalculateChange_ThrowsException_WhenAvailableCoinsAreNull()
         {
-            int change = 100;
+            int amount = 100;
             List<int> availableCoins = null;
 
-            Assert.Throws<ArgumentNullException>(() => ChangeCalculator.CalculateChange(change, availableCoins));
+            Assert.Throws<ArgumentNullException>(() => ChangeCalculator.CalculateChange(amount, availableCoins));
         }
     }
 }
