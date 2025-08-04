@@ -27,6 +27,17 @@ namespace ChangeCalculationTests
         }
 
         [Fact]
+        public void CalculateChange_ReturnMultipleValuesOutOfOrder_ChangeIsCombinationOfAvailableCoins()
+        {
+            int change = 61;
+            var availableCoins = new List<int> { 50, 10, 5, 2, 2, 2 };
+
+            var functionResult = ChangeCalculator.CalculateChange(change, availableCoins);
+
+            Assert.Equal(new List<int> { 50, 5, 2, 2, 2 }, functionResult);
+        }
+
+        [Fact]
         public void CalculateChange_ReturnCorrectMultipleValues_ChangeIsCombinationOfAvailableCoins()
         {
             int change = 30;
