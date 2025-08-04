@@ -4,7 +4,7 @@
     {
         private static readonly List<int> _validCoins = new List<int> { 100, 50, 10, 5, 2, 1 };
 
-        public static object CalculateChange(int change, List<int> availableCoins)
+        public static CalculationResult CalculateChange(int change, List<int> availableCoins)
         {
             var invalidCoins = availableCoins.Where(x => !_validCoins.Contains(x)).ToList();
             if (invalidCoins.Count > 0)
@@ -13,12 +13,12 @@
             if (change < 0)
                 throw new ArgumentException("Change cannot be negative!", nameof(change));
 
-            if (change == 0) return "No change required!";
+            if (change == 0) return new CalculationResult { CanReturn = true, Coins = new List<int>() };
 
             availableCoins = availableCoins.OrderByDescending(x => x).ToList();
             var result = FindCombination(change, availableCoins, new List<int>());
 
-            return result != null ? result : "Pay by card!";
+            return result != null ? new CalculationResult { CanReturn = true, Coins = result} : new CalculationResult { CanReturn = false, Coins = new List<int>() };
         }
 
         private static List<int> FindCombination(int remaining, List<int> coins, List<int> currentCombination)
@@ -54,5 +54,11 @@
 
             return null;
         }
+    }
+
+    public class CalculationResult
+    {
+        public bool CanReturn { get; set; }
+        public List<int> Coins { get; set; }
     }
 }
