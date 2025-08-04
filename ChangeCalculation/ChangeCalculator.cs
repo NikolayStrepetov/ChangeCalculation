@@ -11,12 +11,19 @@
                                .ToList();
 
             if (invalidCoins.Count > 0)
+            {
                 throw new ArgumentException("Invalid coins! Valid are: 100, 50, 10, 5, 2, 1.");
+            }
 
             if (amount < 0)
+            {
                 throw new ArgumentException("Change cannot be negative!", nameof(amount));
+            }
 
-            if (amount == 0) return new CalculationResult { CanReturn = true, Coins = new List<int>() };
+            if (amount == 0)
+            {
+                return new CalculationResult { CanReturn = true, Coins = new List<int>() };
+            }
 
             availableCoins = availableCoins
                              .OrderByDescending(x => x)
